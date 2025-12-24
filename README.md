@@ -12,4 +12,6 @@ Tôi tập trung xây dựng core gameplay logic của game  Sort Water Puzzle, 
 -shader (tự tìm hiểu và  tự tay làm )
 
 Phần animation và hiển thị được triển khai ở mức cơ bản để phục vụ gameplay.
-Dự án giúp tôi hiểu rõ hơn cách tổ chức logic cho một game puzzle và cách tiếp cận bài toán khi bắt đầu từ con số 0.
+Dự án giúp tôi hiểu rõ hơn cách tổ chức logic cho một game puzzle và cách tiếp cận bài toán khi bắt đầu từ con số 0. 
+Đồng thời giúp tôi có tư duy về cách bắt đầu một dự án đó là từ những thứ cốt lõi chứ không phải là từ code.
+
