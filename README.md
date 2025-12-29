@@ -3,13 +3,14 @@
 Dự án prototype được thực hiện bằng Unity 2022.3 
 Tôi tập trung xây dựng core gameplay logic của game  Sort Water Puzzle, bao gồm:
 
+Phần tham khảo:
 -Quản lý dữ liệu ống và màu nước
 
 -Kiểm tra luật đổ hợp lệ
 
 -Xử lý tương tác click chọn và đổ nước
-
--shader (tự tìm hiểu và  tự tay làm )
+Phần tự làm:
+-shader và material
 
 Phần animation và hiển thị được triển khai ở mức cơ bản để phục vụ gameplay.
 Dự án giúp tôi hiểu rõ hơn cách tổ chức logic cho một game puzzle và cách tiếp cận bài toán khi bắt đầu từ con số 0. 
