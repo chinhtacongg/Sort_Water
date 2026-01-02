@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TubeController : MonoBehaviour
 {
-    [SerializeField] private Color[] tubeColors;
+    public Color[] tubeColors;
     [SerializeField] private SpriteRenderer tubeMaskSR;
     [SerializeField] AnimationCurve scaleAndRotationCurve;
     [SerializeField] AnimationCurve fillAmountCurve;
@@ -15,7 +15,7 @@ public class TubeController : MonoBehaviour
     private int rotationIndex = 0;
 
     [Range(0, 4)]
-    [SerializeField]private int numberOfColors = 4;
+    public int numberOfColors = 4;
     public Color topColor;
     [SerializeField]private int numberOfTopColorCount = 1;
 
@@ -161,7 +161,7 @@ public class TubeController : MonoBehaviour
 
             tubeMaskSR.material.SetFloat("_SARM", scaleAndRotationCurve.Evaluate(angleValue));
 
-            if (fillAmounts[numberOfColors] > fillAmountCurve.Evaluate(angleValue)+0.005f)
+            if (numberOfColors > 0 && fillAmounts[numberOfColors] > fillAmountCurve.Evaluate(angleValue)+0.005f)
             {
                 if (lineRenderer.enabled == false)
                 {
@@ -170,8 +170,8 @@ public class TubeController : MonoBehaviour
 
                     lineRenderer.SetPosition(0, ChosePoint.position);
                     lineRenderer.SetPosition(1, ChosePoint.position-Vector3.up*1.45f);
-
                     lineRenderer.enabled = true;
+                    tubeController.FillUp(fillAmountCurve.Evaluate(lastAngleValue) - fillAmountCurve.Evaluate(angleValue));
                 }
 
                 tubeMaskSR.material.SetFloat("_FillAmount",fillAmountCurve.Evaluate(angleValue));
@@ -192,6 +192,11 @@ public class TubeController : MonoBehaviour
 
         numberOfColors -= amountOfColorTransfer;
         tubeController.numberOfColors += amountOfColorTransfer;
+        if (numberOfColors - amountOfColorTransfer <= 0)
+        {
+            tubeMaskSR.material.SetFloat("_FillAmount", fillAmounts[0]);
+        }
+        GameManager.instance.CheckWin();
 
         lineRenderer.enabled = false;
         StartCoroutine(RotationTubeBack());
@@ -307,8 +312,11 @@ public class TubeController : MonoBehaviour
 
     public void FillUp(float fillAmountToAdd)
     {
-        tubeMaskSR.material.SetFloat("_FillAmount", tubeMaskSR.material.GetFloat("_FillAmount") + fillAmountToAdd);
+        float current = tubeMaskSR.material.GetFloat("_FillAmount");
+        float next = Mathf.Clamp01(current + fillAmountToAdd);
+        tubeMaskSR.material.SetFloat("_FillAmount", next);
     }
+
 
     public void ChoseRotationPointDir()
     {
